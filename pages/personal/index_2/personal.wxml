@@ -7,15 +7,17 @@
     </view>
     <view class="bg-null"></view>
     <view class="avatar-container" wx:if="{{!showLoginButton}}">
-      <image class="avatar" src='{{user.avatar}}'></image>
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image class="avatar" src='{{user.avatar || avatarUrl}}'></image>
+      </button>
       <image class="header-avatar-border" src="/image/v2/border.png"></image>
       <image class="boy" wx:if="{{user.gender == 1}}" src="/image/v2/boy.png"></image>
       <image class="girl" wx:if="{{user.gender == 2}}" src="/image/v2/girl.png"></image>
     </view>
 
     <view class="avatar-container" wx:if="{{showLoginButton}}">
-      <view class="login-button" wx:if="{{showLoginButton}}">
-        <button bindtap="getAuthUserInfo">登录</button>
+      <view class="login-button">
+        <button bindtap="getAuthUserInfo" class="modern-login-btn">一键登录</button>
       </view>
     </view>
 
@@ -27,7 +29,7 @@
         <view>粉丝</view>
       </view>
       <view class="nickname">
-        <view wx:if="{{!showLoginButton}}" class="nickname-data">{{user.nickname}}</view>
+        <input wx:if="{{!showLoginButton}}" type="nickname" class="nickname-data" placeholder="点击设置昵称" value="{{user.nickname || nickname}}" bindblur="onSaveNickname" />
       </view>
       <view class="follow" bindtap="openFollowList" data-t="1">
         <view>{{user.follow_num}}</view>

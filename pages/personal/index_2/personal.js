@@ -38,11 +38,20 @@ Page({
   onLoad: function () {
     this.checkAuth();
     let userStorage = wx.getStorageSync('user');
+    let token = wx.getStorageSync('token');
+    
     if (userStorage){
       this.setData({
         user: userStorage
       })
     }
+    
+    if (!token) {
+      this.setData({
+        showLoginButton: true
+      })
+    }
+
     this.setData({ param: app.globalData.param })
     this.getPersonalInfo()
     this.newLetterCount()
@@ -57,8 +66,23 @@ Page({
     const { avatarUrl } = e.detail 
     console.log(e.detail,"头像")
     this.setData({
-      avatarUrl,
+      avatarUrl: avatarUrl,
+      'user.avatar': avatarUrl
     })
+    
+    // In a real app, you would upload this to your server/Qiniu here
+    // and update the user's profile
+  },
+
+  onSaveNickname: function(e) {
+    const nickname = e.detail.value;
+    if (nickname) {
+      this.setData({
+        nickname: nickname,
+        'user.nickname': nickname
+      });
+      // In a real app, you would send this to your backend
+    }
   },
 
   /**
@@ -278,7 +302,7 @@ Page({
    * 获取贴子
    */
   getPost: function () {
-    http.get(`/post?page_size=${this.data.pageSize}&page_number=${this.data.pageNumber}&just=1&user_id=${this.data.user.id}`, {}, res => {
+    return http.get(`/post?page_size=${this.data.pageSize}&page_number=${this.data.pageNumber}&just=1&user_id=${this.data.user.id}`).then(res => {
       this.setData({
         showGeMoreLoadin: false
       })
@@ -310,7 +334,7 @@ Page({
   },
 
   getMyRank: function () {
-    http.get(`/my_rank`, {}, res => {
+    return http.get(`/my_rank`).then(res => {
       let resData = res.data;
       if (resData.error_code == 0) {
         this.setData({
@@ -324,7 +348,7 @@ Page({
    * 获取统计的数据
    */
   statistic: function () {
-    http.get('/run_statistic', {}, res=>{
+    return http.get('/run_statistic').then(res=>{
       let todayStep = res.data.data.today_step != null ? res.data.data.today_step : 0;
       let totalStep = res.data.data.total_step != null ? res.data.data.total_step : 0;
       this.setData({
@@ -352,17 +376,17 @@ Page({
   checkAuth:function(){
     let that = this;
 
-    if (wx.getUserProfile) {
-      this.setData({
-        showLoginButton: false,
-        pageNumber: this.data.initPageNumber,
-        posts:[]
-      })
-      that.getPersonalInfo()
-      that.statistic()
-      that.getMyRank()
-      this.getPost()
-    }
+    // if (wx.getUserProfile) {
+    //   this.setData({
+    //     showLoginButton: false,
+    //     pageNumber: this.data.initPageNumber,
+    //     posts:[]
+    //   })
+    //   that.getPersonalInfo()
+    //   that.statistic()
+    //   that.getMyRank()
+    //   this.getPost()
+    // }
   },
 
   /**
@@ -380,7 +404,7 @@ Page({
    * 获取个人信息
    */
   getPersonalInfo() {
-    http.get(`/personal_info`, {}, res => {
+    return http.get(`/personal_info`).then(res => {
       this.setData({
         user: res.data.data,
         sinageture:res.data.data.personal_signature
@@ -465,33 +489,50 @@ Page({
   },
 
   /**
- * 监听用户点击授权按钮
- */
-  getAuthUserInfo: function (data) {
+   * 监听用户点击授权按钮 (2026 Modern Standard: Async/Await)
+   */
+  getAuthUserInfo: async function (data) {
     this.setData({
       showLoginButton: false
     });
-    let that = this
-    http.login(null, null, null, res => {
+    
+    try {
+      wx.showLoading({ title: '正在登录...', mask: true });
+      
+      // Use the modern Promise-based login
+      await http.login();
+      
       this.setData({
         pageNumber: this.data.initPageNumber,
-        posts:[]
+        posts: []
       });
-      that.getPersonalInfo();
-      that.statistic()
-      that.getMyRank()
-      this.getPost()
-
-      wx.showLoading({
+      
+      // Fetch user data concurrently for better performance
+      await Promise.all([
+        this.getPersonalInfo(),
+        this.statistic(),
+        this.getMyRank(),
+        this.getPost()
+      ]);
+      
+      wx.hideLoading();
+      wx.showToast({
         title: '登录成功后可修改用户昵称和头像！',
+        icon: 'none',
+        duration: 1500
       });
-      setTimeout(res=>{
-        wx.hideLoading();
+      
+      setTimeout(() => {
         wx.navigateTo({
           url: '/pages/personal/message/message?type=0&new_message=0&t=2'
-        })
-      },1500)
-    });
+        });
+      }, 1500);
+      
+    } catch (err) {
+      this.setData({ showLoginButton: true });
+      console.error("Login failed:", err);
+      // http.js 内部已调用 wx.showToast，因此无需再次调用 wx.hideLoading 或 wx.showToast，以免引起“必须配对使用”的警告和重复弹窗。
+    }
   },
 
   /**

@@ -322,6 +322,26 @@
   color: #303030;
 }
 
+.modern-login-btn {
+  background: #07c160 !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.avatar-btn {
+  padding: 0;
+  margin: 0;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.avatar-btn::after {
+  border: none;
+}
+
 /** 表白墙 **/
 .body-flag{
   width: 100%;
