@@ -1,30 +1,26 @@
-//upload image
-
-const uploadDomain = 'http://image.kucaroom.com/';
-const qiniuUploader = require("qiniuUploader.js");
-
-let uploadToken = '我是七牛token';
-
-// 初始化七牛相关参数
-function initQiniu(configs) {
-  var options = {
-    region: configs.region, // 华北区
-    uptoken: configs.token,
-    domain: configs.domain,
-    shouldUseQiniuFileName: false
-  };
-  qiniuUploader.init(options);
-}
-
-/** 上传图片 */
-function uploadImage(configs,image, callback = null) {
-  initQiniu(configs);
-  let filePath = image;
-  qiniuUploader.upload(filePath, (res) => {
-    callback(res);
+/** 上传图片至微信云开发存储 */
+function uploadImage(configs, image, callback = null) {
+  const extMatch = image.match(/\.[^.]+?$/);
+  const fileExtension = extMatch ? extMatch[0] : '.png';
+  const cloudPath = 'uploads/' + Date.now() + Math.floor(Math.random() * 1000) + fileExtension;
+  
+  wx.cloud.uploadFile({
+    cloudPath: cloudPath,
+    filePath: image,
+    success: res => {
+      // 模拟 Qiniu 的返回结构，保持兼容性
+      const mockQiniuRes = {
+        key: res.fileID,
+        imageURL: res.fileID
+      };
+      if (callback) callback(mockQiniuRes);
+    },
+    fail: err => {
+      console.error('云开发上传失败', err);
+      if (callback) callback({ error: err });
+    }
   });
 }
-
 
 module.exports = {
   upload: uploadImage

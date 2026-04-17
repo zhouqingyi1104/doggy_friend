@@ -6,10 +6,18 @@ let RATE = windowInfo.windowHeight / windowInfo.windowWidth;
 
 App({
   onLaunch: function () {
+    // 初始化微信云开发
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    } else {
+      wx.cloud.init({
+        traceUser: true,
+      })
+    }
 
     this.globalData.apiUrl = config.domain;
     this.globalData.appKey = config.alianceKey;
-    this.globalData.imageUrl = config.qiniuDomain+"/";
+    this.globalData.imageUrl = config.qiniuDomain ? config.qiniuDomain + "/" : "";
     this.globalData.bgIimage = config.bgImage;
     
     this.globalData.reloadSale = false;

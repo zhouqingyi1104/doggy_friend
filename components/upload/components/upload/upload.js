@@ -46,17 +46,6 @@ Component({
           newData.uploadNumber = 9;
         }
 
-        if (newData.region == '' || newData.region == undefined) {
-          console.error("qiniu.region不能为空");
-          return false;
-        }
-
-        if (newData.domain == '' || newData.domain == undefined) {
-          console.error("qiniu.domain不能为空");
-          return false;
-        }
-
-
         if (newData.returnAllImage == undefined) {
           newData.returnAllImage = true;
         }
@@ -70,23 +59,8 @@ Component({
 
   methods:{
     configQiniu: function() {
-      let qiniuData = this.data.qiniuInfo;
-      if (qiniuData.region == ''){
-        console.error('七牛存储区域不能为空');
-        return false;
-      }
-
-      if (qiniuData.token == '') {
-        console.error('七牛授权token不能为空');
-        return false;
-      }
-
-      if (qiniuData.domain == '') {
-        console.error('七牛域名不能为空');
-        return false;
-      }
-
-      return this.data.qiniuInfo;
+      // 已切换为微信云开发，不再强制校验七牛配置
+      return this.data.qiniuInfo || {};
     },
 
     /**

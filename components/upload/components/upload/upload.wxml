@@ -3,7 +3,7 @@
     <view class='image-item'
           wx:if="{{iconInfo.showImage}}" 
           wx:for="{{imageArray}}" 
-          wx:key='{{imageArray}}'>
+          wx:key="localPath">
       <image class='upload-image' 
              bindtap='previewImage'
              style='width:{{iconInfo.width}};height:{{iconInfo.height}}' 
@@ -13,7 +13,7 @@
             <image src='/image/delete.png' 
                     style="width: 35rpx;height: 35rpx;position:absolute;top: rpx;right: 0rpx;z-index: 100;"
                    id='{{index}}' 
-                   wx:key='{{imageArray}}' 
+                   wx:key="*this" 
                    bindtap='removeImage' 
                    class='remove-image'></image>
         </view>
