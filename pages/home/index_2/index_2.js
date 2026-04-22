@@ -70,7 +70,7 @@ Page({
   },
 
   onShow: function (option) {
-
+    this.topic();
     if (app.globalData.reloadHome == true){
       app.globalData.reloadHome = false;
       this.setData({
@@ -101,7 +101,7 @@ Page({
    */
   praiseTopic: function (e) {
     let id = e.currentTarget.dataset.id;
-    http.post('/praise/'+id+'/topic', {}, function (res) {
+    http.post('/praise/'+id+'/topic', {}, res => {
       this.setData({topic:res.data.data});
     });
   },
@@ -130,7 +130,7 @@ Page({
     let objType = e.target.dataset.type;
     let thisTopic = this.data.topic;
 
-    if (objType == 1 && thisTopic != null){
+    if (objType == 1 && thisTopic && thisTopic !== ''){
       this.setData({
         showTopic: true,
         posts: []
@@ -677,16 +677,18 @@ Page({
 
   topic:function(){
     http.get(`/topic`, {}, res=> {
-      if(res.data.data){
-        let topicShow = res.data.data != null ? true : false;
+      if(res.data && res.data.data){
+        let topicShow = true;
         this.setData({ topic: res.data.data, showTopic: topicShow });
+      } else {
+        this.setData({ topic: '', showTopic: false });
       }
-
     });
   },
   
   openTopic:function(e){
     let id = e.currentTarget.dataset.id;
+    if (!id || id === 'undefined') return;
     wx.navigateTo({
       url: '/pages/home/topic_detail/topic_detail?id=' + id
     })

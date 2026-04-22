@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="form-group">
+    <view class="label">商品名称</view>
+    <input class="input" placeholder="如：九成新 iPhone 13" bindinput="inputChange" data-field="title" value="{{title}}"/>
+  </view>
+
+  <view class="form-group">
+    <view class="label">商品分类</view>
+    <picker bindchange="bindCatChange" value="{{catIndex}}" range="{{categories}}">
+      <view class="picker">{{categories[catIndex]}}</view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <view class="label">商品描述</view>
+    <textarea class="textarea" placeholder="描述商品新旧程度、使用情况等（注：本平台严禁发布课程、家教等违规信息）" bindinput="inputChange" data-field="description" value="{{description}}"></textarea>
+  </view>
+
+  <view class="form-group">
+    <view class="label">出售价格 (元)</view>
+    <input class="input" type="digit" placeholder="输入金额" bindinput="inputChange" data-field="price" value="{{price}}"/>
+  </view>
+
+  <view class="form-group">
+    <view class="label">库存数量</view>
+    <input class="input" type="number" placeholder="默认为1" bindinput="inputChange" data-field="stock" value="{{stock}}"/>
+  </view>
+
+  <view class="tips">
+    提示：发布二手商品后，买家购买支付的款项将直接转入您的钱包余额。请保持诚信交易！
+  </view>
+
+  <button class="submit-btn" bindtap="submitGoods">发布闲置</button>
+</view>

@@ -1,6 +1,44 @@
 const config = require("./../config.js");
 const app = getApp();
 
+/** 
+* 封装微信http请求 (Promise化)
+*/
+const http = function ({ url, method, data }) {
+  return new Promise((resolve, reject) => {
+    let _data = data || {};
+    _data.app_code = config.alianceKey;
+    let token = wx.getStorageSync('token');
+    
+    wx.request({
+      url: config.domain + url,
+      header: {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      method: method || 'GET',
+      data: _data,
+      success: function (res) {
+        if (res.statusCode === 200 || res.statusCode === 201) {
+           // Handle modern NestJS successful payload
+           // Check if it's the legacy wrapper or modern format
+           if (res.data && res.data.error_code !== undefined && res.data.error_code !== 0) {
+              reject(res);
+           } else {
+              resolve(res.data.data ? res.data : { data: res.data });
+           }
+        } else {
+           reject(res);
+        }
+      },
+      fail: function (err) {
+        console.error(err);
+        reject(err);
+      }
+    });
+  });
+}
+
 /**
 * 登录获取token (2026 Modern Standard & Donut Multi-platform)
 */
@@ -196,5 +234,5 @@ const collectFormId = function(formId) {
   });
 }
 
-module.exports = { get, post, patch, put, httpDelete, httpRequest, login, getNewInbox,collectFormId}
+module.exports = { get, post, patch, put, httpDelete, httpRequest, login, getNewInbox, collectFormId, http }
 

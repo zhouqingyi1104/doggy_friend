@@ -1,4 +1,9 @@
 <view class="container">
+  <view class="tabs">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">我发布的</view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">我接取的</view>
+  </view>
+
   <view class="task-list">
     <view class="task-item" wx:for="{{tasks}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
       <view class="header">
@@ -9,12 +14,8 @@
         <text class="desc">{{item.description}}</text>
       </view>
       <view class="footer">
-        <view class="user-info">
-          <image src="{{item.buyer.avatar ? item.buyer.avatar : '/image/v2/my.png'}}" class="avatar"></image>
-          <text class="nickname">{{item.buyer.nickname}}</text>
-          <text class="credit">信誉分: {{item.buyer.credit_score}}</text>
-        </view>
-        <view class="status {{item.status === 1 ? 'status-waiting' : ''}}">
+        <text class="date-time">{{item.created_at}}</text>
+        <view class="status {{item.status === 1 ? 'status-waiting' : (item.status === 2 ? 'status-working' : (item.status === 3 ? 'status-completed' : ''))}}">
           {{item.status === 1 ? '待接单' : (item.status === 2 ? '进行中' : (item.status === 3 ? '已完成' : '已取消'))}}
         </view>
       </view>
@@ -23,9 +24,5 @@
 
   <view class="empty" wx:if="{{tasks.length === 0}}">
     暂无任务数据
-  </view>
-
-  <view class="post-btn" bindtap="goPost">
-    <image src="/image/v2/index-poster.png" class="post-icon"></image>
   </view>
 </view>

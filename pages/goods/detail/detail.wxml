@@ -1,0 +1,48 @@
+<view class="container" wx:if="{{goods}}">
+  <view class="header-card">
+    <view class="title">{{goods.title}}</view>
+    <view class="price-wrap">
+      <text class="price">￥{{goods.price}}</text>
+      <text class="stock">库存: {{goods.stock}}件</text>
+    </view>
+  </view>
+
+  <view class="info-card">
+    <view class="info-item">
+      <text class="label">商品分类：</text>
+      <text class="value">{{goods.category}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">发布时间：</text>
+      <text class="value">{{goods.created_at}}</text>
+    </view>
+    <view class="info-desc">
+      <view class="label">详细描述：</view>
+      <view class="desc-content">{{goods.description || '无'}}</view>
+    </view>
+  </view>
+
+  <view class="user-card">
+    <view class="card-title">卖家信息</view>
+    <view class="user-info">
+      <image src="{{goods.seller.avatar ? goods.seller.avatar : '/image/v2/my.png'}}" class="avatar"></image>
+      <view class="info-text">
+        <view class="nickname">{{goods.seller.nickname}}</view>
+        <view class="credit">信誉分: {{goods.seller.credit_score}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-bar" wx:if="{{myId !== goods.seller_id && goods.stock > 0}}">
+    <button class="btn btn-primary" bindtap="buyGoods">立即购买</button>
+  </view>
+  
+  <view class="action-bar" wx:if="{{goods.stock <= 0}}">
+    <button class="btn btn-disabled" disabled>已售罄</button>
+  </view>
+
+  <view class="action-bar" wx:if="{{myId === goods.seller_id}}">
+    <button class="btn btn-disabled" disabled>这是我发布的商品</button>
+  </view>
+
+</view>

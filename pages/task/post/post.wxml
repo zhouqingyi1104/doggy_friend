@@ -18,7 +18,11 @@
 
   <view class="form-group">
     <view class="label">约定时间</view>
-    <input class="input" placeholder="如: 2026-05-01 14:00" bindinput="inputChange" data-field="time_range" value="{{time_range}}"/>
+    <picker mode="date" value="{{time_range}}" start="{{today}}" bindchange="bindDateChange">
+      <view class="picker">
+        {{time_range ? time_range : '点击选择日期'}}
+      </view>
+    </picker>
   </view>
 
   <view class="form-group">

@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="goods-list">
+    <view class="goods-item" wx:for="{{goodsList}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="header">
+        <view class="title">{{item.title}}</view>
+        <view class="price">￥{{item.price}}</view>
+      </view>
+      <view class="content">
+        <text class="desc">{{item.description}}</text>
+      </view>
+      <view class="footer">
+        <view class="user-info">
+          <image src="{{item.seller.avatar ? item.seller.avatar : '/image/v2/my.png'}}" class="avatar"></image>
+          <text class="nickname">{{item.seller.nickname}}</text>
+        </view>
+        <view class="stock">库存: {{item.stock}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{goodsList.length === 0}}">
+    暂无商品，快来发布吧~
+  </view>
+
+  <view class="post-btn" bindtap="goPost">
+    <image src="/image/v2/index-poster.png" class="post-icon"></image>
+  </view>
+</view>

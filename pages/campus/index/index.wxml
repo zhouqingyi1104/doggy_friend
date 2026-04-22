@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="header">
+    <view class="title">校园生活</view>
+    <view class="subtitle">发现身边的有趣日常</view>
+  </view>
+
+  <view class="module-grid">
+    <view class="module-item" wx:for="{{modules}}" wx:key="name" bindtap="navigateTo" data-url="{{item.url}}">
+      <view class="icon-wrap">
+        <image src="{{item.icon}}" class="icon"></image>
+      </view>
+      <view class="text-wrap">
+        <view class="name">{{item.name}}</view>
+        <view class="desc">{{item.desc}}</view>
+      </view>
+      <text class="arrow">></text>
+    </view>
+  </view>
+</view>

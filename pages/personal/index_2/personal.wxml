@@ -4,25 +4,7 @@
     <image class="bg" src="/image/v2/bg.png"></image>
     <view class="my-word" wx:if="{{sinageture}}">
       <view class="my-word-content">{{sinageture}}</view>
-      <view class="nav-item" bindtap="openPage" data-url="/pages/wallet/index/index">
-      <view class="item-left">
-        <image src="/image/v2/wallet.png" class="icon" wx:if="{{false}}"></image>
-        <text class="item-text">我的钱包</text>
-      </view>
-      <view class="item-right">
-        <image src="/image/v2/arrow-right.png" class="arrow"></image>
-      </view>
     </view>
-    <view class="nav-item" bindtap="openPage" data-url="/pages/task/index/index">
-      <view class="item-left">
-        <image src="/image/v2/task.png" class="icon" wx:if="{{false}}"></image>
-        <text class="item-text">时间互助 (跑腿代购)</text>
-      </view>
-      <view class="item-right">
-        <image src="/image/v2/arrow-right.png" class="arrow"></image>
-      </view>
-    </view>
-  </view>
     <view class="bg-null"></view>
     <view class="avatar-container" wx:if="{{!showLoginButton}}">
       <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
@@ -40,6 +22,28 @@
     </view>
 
   </view>
+  
+  <view class="nav-menus">
+    <view class="nav-item" bindtap="openPage" data-url="/pages/wallet/index/index">
+      <view class="item-left">
+        <image src="/image/v2/saylove.png" class="icon"></image>
+        <text class="item-text">我的钱包</text>
+      </view>
+      <view class="item-right">
+        <text class="arrow">></text>
+      </view>
+    </view>
+    <view class="nav-item" bindtap="openPage" data-url="/pages/personal/task_list/task_list">
+      <view class="item-left">
+        <image src="/image/v2/run.png" class="icon"></image>
+        <text class="item-text">时间互助 (我的任务)</text>
+      </view>
+      <view class="item-right">
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
     <!--个人信息-->
     <view class="user-info">
       <view class="fans"  bindtap="openFollowList" data-t="2">
@@ -105,7 +109,7 @@
         <view class="item-header">
           <view class="avatar-item">
             <image class="avatar-border" src="/image/v2/border.png"></image>
-            <image class="user-avatar" src="{{item.poster.avatar}}"></image>
+            <image class="user-avatar" src="{{item.poster.avatar ? item.poster.avatar : '/image/v2/my.png'}}"></image>
           </view>
           <view class="nickname-item">
             <view class="nickname-top">

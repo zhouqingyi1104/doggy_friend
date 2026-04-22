@@ -30,8 +30,8 @@
       <view class="topic-bottom">
         <view class="topic-bottom-content">
           <view class="topic-bottom-left"><image src="/image/v2/index-browse.png"></image><view>{{topic.view_number}}次</view></view>
-          <view class="topic-bottom-middle"><image src="/image/v2/index-topic-zan.png"></image><view>{{topic.praise_number}}</view></view>
-          <view class="topic-bottom-right"><image src="/image/v2/index-topic-comment.png"></image><view>{{topic.comment_number}}</view></view>
+          <view class="topic-bottom-middle"><image src="/image/v2/index-topic-zan.png" bindtap='praiseTopic' data-id="{{topic.id}}"></image><view>{{topic.praise_number}}</view></view>
+          <view class="topic-bottom-right"><image src="/image/v2/index-topic-comment.png" bindtap='openTopic' data-id="{{topic.id}}"></image><view>{{topic.comment_number}}</view></view>
         </view>
       </view>
     </view>
@@ -53,7 +53,7 @@
         <view class="item-header">
           <view class="avatar-item" bindtap="openUserInfo" data-id="{{item.poster.id}}">
             <image class="avatar-border" src="/image/v2/border.png"></image>
-            <image class="user-avatar" src="{{item.poster.avatar}}"></image>
+            <image class="user-avatar" src="{{item.poster.avatar ? item.poster.avatar : '/image/v2/my.png'}}"></image>
           </view>
           <view class="nickname-item" bindtap="openUserInfo" data-id="{{item.poster.id}}">
             <view class="nickname-top">

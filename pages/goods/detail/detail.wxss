@@ -33,27 +33,9 @@
   color: #f76260;
 }
 
-.deposit {
+.stock {
   font-size: 28rpx;
-  color: #fbc346;
-}
-
-.status-tag {
-  display: inline-block;
-  padding: 6rpx 16rpx;
-  border-radius: 6rpx;
-  font-size: 24rpx;
-  background: #f1f1f1;
   color: #999;
-}
-
-.status-1 {
-  background: rgba(9, 187, 7, 0.1);
-  color: #09bb07;
-}
-.status-2 {
-  background: rgba(251, 195, 70, 0.1);
-  color: #fbc346;
 }
 
 .info-item {
@@ -134,8 +116,7 @@
   color: #fff;
 }
 
-.btn-danger {
-  background: #fff;
-  color: #f76260;
-  border: 1rpx solid #f76260;
+.btn-disabled {
+  background: #eee;
+  color: #999;
 }

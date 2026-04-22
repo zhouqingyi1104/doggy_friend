@@ -36,7 +36,7 @@
   <view class="user-card">
     <view class="card-title">发单方信息</view>
     <view class="user-info">
-      <image src="{{task.buyer.avatar || '/image/default_avatar.png'}}" class="avatar"></image>
+      <image src="{{task.buyer.avatar ? task.buyer.avatar : '/image/v2/my.png'}}" class="avatar"></image>
       <view class="info-text">
         <view class="nickname">{{task.buyer.nickname}}</view>
         <view class="credit">信誉分: {{task.buyer.credit_score}} (Lv.{{task.buyer.level}})</view>
@@ -47,7 +47,7 @@
   <view class="user-card" wx:if="{{task.seller}}">
     <view class="card-title">接单方信息</view>
     <view class="user-info">
-      <image src="{{task.seller.avatar || '/image/default_avatar.png'}}" class="avatar"></image>
+      <image src="{{task.seller.avatar ? task.seller.avatar : '/image/v2/my.png'}}" class="avatar"></image>
       <view class="info-text">
         <view class="nickname">{{task.seller.nickname}}</view>
         <view class="credit">信誉分: {{task.seller.credit_score}} (Lv.{{task.seller.level}})</view>

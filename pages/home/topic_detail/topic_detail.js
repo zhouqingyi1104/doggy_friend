@@ -46,19 +46,22 @@ Page({
   },
 
   getTopic:function(id){
+    if (!id || id === 'undefined') return;
     http.get(`/topic/`+id,{},res => {
       let topic = res.data.data;
-      this.setData({
-        title: topic.title,
-        topicContent: topic.content,
-        attachments: topic.attachments,
-        praiseNumber: topic.praise_number,
-        viewNumber: topic.view_number,
-        commentNumber: topic.comment_number,
-        //comments: topic.comments ? topic.comments,
-        objId:topic.id,
-        showFooter: true
-      });
+      if (topic) {
+        this.setData({
+          title: topic.title,
+          topicContent: topic.content,
+          attachments: topic.attachments,
+          praiseNumber: topic.praise_number,
+          viewNumber: topic.view_number,
+          commentNumber: topic.comment_number,
+          //comments: topic.comments ? topic.comments,
+          objId:topic.id,
+          showFooter: true
+        });
+      }
     });
   },
 
@@ -79,10 +82,12 @@ Page({
 * 获取话题评论 
 */
   getComments: function () {
+    let id = this.data.objId;
+    if (!id || id === 'undefined') return;
+
     wx.showLoading({
       title: '评论加载中',
     });
-    let id = this.data.objId;
     http.get('/topic/' + id + `/comments?page_size=${this.data.pageSize}&page_number=${this.data.pageNumber}`,{}, res=> {
        let tempArray = this.data.comments;
        wx.hideLoading();
@@ -90,7 +95,7 @@ Page({
          showGeMoreLoadin: false
        });
 
-      if (res.data.data.page_data){
+      if (res.data && res.data.data && res.data.data.page_data){
         res.data.data.page_data.map(item=>{
           if (item != undefined){
             tempArray.push(item);
@@ -108,9 +113,11 @@ Page({
   */
   getNewComments: function () {
     let id = this.data.objId;
+    if (!id || id === 'undefined') return;
+
     http.get('/topic/' + id + `/new_comments?time=` + this.data.currentTime,
       {}, res=> {
-        if (res.data.data) {
+        if (res.data && res.data.data) {
           let commentsArray = this.data.comments;
           res.data.data.map(item => {
             let ifRepeat = false;

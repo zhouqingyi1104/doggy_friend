@@ -79,6 +79,7 @@ Page({
     
     // In a real app, you would upload this to your server/Qiniu here
     // and update the user's profile
+    this.updateUserProfile({ avatar: avatarUrl });
   },
 
   onSaveNickname: function(e) {
@@ -89,7 +90,21 @@ Page({
         'user.nickname': nickname
       });
       // In a real app, you would send this to your backend
+      this.updateUserProfile({ nickname: nickname });
     }
+  },
+
+  updateUserProfile: function(data) {
+    http.post('/user/profile', data).then(res => {
+      // Update local storage
+      const userStorage = wx.getStorageSync('user') || {};
+      const updatedUser = { ...userStorage, ...data };
+      wx.setStorageSync('user', updatedUser);
+      wx.showToast({ title: '资料已更新', icon: 'success' });
+    }).catch(err => {
+      console.error(err);
+      wx.showToast({ title: '资料更新失败', icon: 'none' });
+    });
   },
 
   /**

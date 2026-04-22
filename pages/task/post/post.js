@@ -1,4 +1,4 @@
-import { http } from '../../../utils/http.js';
+const { http } = require('../../../utils/http.js');
 const app = getApp();
 
 Page({
@@ -8,6 +8,7 @@ Page({
     description: '',
     location: '',
     time_range: '',
+    today: '',
     price: '',
     deposit: '',
     min_credit: 100,
@@ -16,10 +17,27 @@ Page({
     typeIndex: 0,
   },
 
+  onLoad() {
+    // 设置日期选择器的最小日期为今天
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    this.setData({
+      today: `${year}-${month}-${day}`
+    });
+  },
+
   bindTypeChange(e) {
     this.setData({
       typeIndex: e.detail.value,
       type: parseInt(e.detail.value) + 1
+    });
+  },
+
+  bindDateChange(e) {
+    this.setData({
+      time_range: e.detail.value
     });
   },
 

@@ -5,11 +5,11 @@
   padding: 20rpx;
 }
 
-.task-list {
+.goods-list {
   padding-bottom: 120rpx;
 }
 
-.task-item {
+.goods-item {
   background: #fff;
   border-radius: 12rpx;
   padding: 30rpx;
@@ -72,24 +72,11 @@
 .nickname {
   font-size: 24rpx;
   color: #999;
-  margin-right: 20rpx;
 }
 
-.credit {
-  font-size: 22rpx;
-  color: #fbc346;
-  border: 1rpx solid #fbc346;
-  padding: 2rpx 8rpx;
-  border-radius: 6rpx;
-}
-
-.status {
+.stock {
   font-size: 24rpx;
   color: #999;
-}
-
-.status-waiting {
-  color: #09bb07;
 }
 
 .post-btn {

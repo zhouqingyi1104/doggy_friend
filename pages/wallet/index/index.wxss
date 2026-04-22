@@ -2,6 +2,7 @@
   padding: 30rpx;
   background: #f4f4f4;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .wallet-card {

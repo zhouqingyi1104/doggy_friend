@@ -3,30 +3,30 @@ const app = getApp();
 
 Page({
   data: {
-    tasks: [],
+    goodsList: [],
     page: 1,
     canLoadMore: true,
   },
 
   onLoad() {
-    this.loadTasks(true);
+    this.loadGoods(true);
   },
 
   onPullDownRefresh() {
-    this.loadTasks(true);
+    this.loadGoods(true);
   },
 
   onReachBottom() {
-    this.loadTasks(false);
+    this.loadGoods(false);
   },
 
-  loadTasks(isRefresh) {
+  loadGoods(isRefresh) {
     if (!this.data.canLoadMore && !isRefresh) return;
     
     let page = isRefresh ? 1 : this.data.page + 1;
 
     http({
-      url: '/task/list',
+      url: '/goods/list',
       method: 'GET',
       data: {
         page: page,
@@ -36,7 +36,7 @@ Page({
       wx.stopPullDownRefresh();
       let newData = res.data.page_data || [];
       this.setData({
-        tasks: isRefresh ? newData : this.data.tasks.concat(newData),
+        goodsList: isRefresh ? newData : this.data.goodsList.concat(newData),
         page: page,
         canLoadMore: newData.length >= 10
       });
@@ -45,14 +45,14 @@ Page({
 
   goPost() {
     wx.navigateTo({
-      url: '/pages/task/post/post'
+      url: '/pages/goods/post/post'
     });
   },
 
   goDetail(e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/task/detail/detail?id=' + id
+      url: '/pages/goods/detail/detail?id=' + id
     });
   }
 });
