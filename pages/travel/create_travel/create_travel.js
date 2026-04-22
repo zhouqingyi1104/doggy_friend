@@ -88,14 +88,6 @@ Page({
           longitude: res.longitude,
           width: 50,
           height: 50,
-          label:{
-            content: res.name,
-            fontSize:8,
-            bgColor:"#FF6347",
-            color:"#FFFFFF",
-            padding:5,
-            borderRadius:10
-          }
         });
 
         _this.setData({

@@ -18,7 +18,11 @@
     "pages/personal/letter/letter",
     "pages/travel/index/index",
     "pages/travel/create_travel/create_travel",
-    "pages/compare_face/face"
+    "pages/compare_face/face",
+    "pages/task/index/index",
+    "pages/task/post/post",
+    "pages/task/detail/detail",
+    "pages/wallet/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

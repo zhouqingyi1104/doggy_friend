@@ -59,7 +59,7 @@ Page({
     myRankData:'',
     myRank:0,
     windowHeight:app.globalData.windowHeight,
-    bgUlr:"http://article.qiuhuiyi.cn/Group.png",
+    bgUlr:"/image/v2/bg.png",
   },
 
   onLoad: function (option) {
@@ -146,11 +146,11 @@ Page({
       let resData = res.data;
       if (resData.error_code == 0) {
         this.setData({
-          myRankData: resData.data.data,
-          myRank: resData.data.rank
+          myRankData: resData.data.data || {},
+          myRank: resData.data.rank || 0
         })
       }
-    });
+    })
   },
 
   getRandList:function(){

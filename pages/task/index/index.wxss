@@ -1,0 +1,118 @@
+.container {
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  padding: 20rpx;
+}
+
+.task-list {
+  padding-bottom: 120rpx;
+}
+
+.task-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #f76260;
+}
+
+.content {
+  margin-bottom: 20rpx;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #666;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1rpx solid #eee;
+  padding-top: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+
+.nickname {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.credit {
+  font-size: 22rpx;
+  color: #fbc346;
+  border: 1rpx solid #fbc346;
+  padding: 2rpx 8rpx;
+  border-radius: 6rpx;
+}
+
+.status {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.status-waiting {
+  color: #09bb07;
+}
+
+.post-btn {
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: #fbc346;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(251, 195, 70, 0.4);
+}
+
+.post-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #999;
+  margin-top: 200rpx;
+  font-size: 28rpx;
+}

@@ -1,0 +1,70 @@
+<view class="container" wx:if="{{task}}">
+  <view class="header-card">
+    <view class="title">{{task.title}}</view>
+    <view class="price-wrap">
+      <text class="price">赏金: ￥{{task.price}}</text>
+      <text class="deposit">要求担保金: ￥{{task.deposit}}</text>
+    </view>
+    <view class="status-tag status-{{task.status}}">
+      {{task.status === 1 ? '待接单' : (task.status === 2 ? '进行中' : (task.status === 3 ? '已完成' : '已取消'))}}
+    </view>
+  </view>
+
+  <view class="info-card">
+    <view class="info-item">
+      <text class="label">任务类型：</text>
+      <text class="value">{{task.type === 1 ? '代购跑腿' : (task.type === 2 ? '搬运服务' : '其他')}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">约定时间：</text>
+      <text class="value">{{task.time_range || '无'}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">约定地点：</text>
+      <text class="value">{{task.location || '无'}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">信誉要求：</text>
+      <text class="value">>= {{task.min_credit}} 分</text>
+    </view>
+    <view class="info-desc">
+      <view class="label">详细描述：</view>
+      <view class="desc-content">{{task.description}}</view>
+    </view>
+  </view>
+
+  <view class="user-card">
+    <view class="card-title">发单方信息</view>
+    <view class="user-info">
+      <image src="{{task.buyer.avatar || '/image/default_avatar.png'}}" class="avatar"></image>
+      <view class="info-text">
+        <view class="nickname">{{task.buyer.nickname}}</view>
+        <view class="credit">信誉分: {{task.buyer.credit_score}} (Lv.{{task.buyer.level}})</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="user-card" wx:if="{{task.seller}}">
+    <view class="card-title">接单方信息</view>
+    <view class="user-info">
+      <image src="{{task.seller.avatar || '/image/default_avatar.png'}}" class="avatar"></image>
+      <view class="info-text">
+        <view class="nickname">{{task.seller.nickname}}</view>
+        <view class="credit">信誉分: {{task.seller.credit_score}} (Lv.{{task.seller.level}})</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-bar" wx:if="{{task.status === 1 && myId !== task.buyer_id}}">
+    <button class="btn btn-primary" bindtap="acceptTask">我要接单</button>
+  </view>
+  
+  <view class="action-bar" wx:if="{{task.status === 2 && myId === task.seller_id}}">
+    <button class="btn btn-primary" bindtap="completeTask">标记已完成</button>
+  </view>
+
+  <view class="action-bar" wx:if="{{(task.status === 1 || task.status === 2) && (myId === task.buyer_id || myId === task.seller_id)}}">
+    <button class="btn btn-danger" bindtap="cancelTask">取消任务 (可能产生违约金)</button>
+  </view>
+
+</view>

@@ -35,6 +35,13 @@ Page({
     avatarUrl:defaultAvatarUrl,
     nickname:""
   },
+  openPage(e) {
+    const url = e.currentTarget.dataset.url;
+    if (url) {
+      wx.navigateTo({ url });
+    }
+  },
+
   onLoad: function () {
     this.checkAuth();
     let userStorage = wx.getStorageSync('user');

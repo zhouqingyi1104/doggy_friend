@@ -28,7 +28,7 @@
       </view>
     </view>
 
-      <view class='item' wx:for="{{plans}}" wx:key="{{plans}}">
+      <view class='item' wx:for="{{plans}}" wx:key="id">
           <view class='left'>
             <view class='date travel-start' wx:if="{{item.id == 0}}">出发点</view>
             <view class='date' wx:if="{{item.id > 0}}">第{{item.id}}站</view>

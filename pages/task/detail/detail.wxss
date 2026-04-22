@@ -1,0 +1,140 @@
+.container {
+  padding: 20rpx;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+.header-card, .info-card, .user-card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.price-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #f76260;
+}
+
+.deposit {
+  font-size: 28rpx;
+  color: #fbc346;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  background: #f1f1f1;
+  color: #999;
+}
+
+.status-1 {
+  background: rgba(9, 187, 7, 0.1);
+  color: #09bb07;
+}
+.status-2 {
+  background: rgba(251, 195, 70, 0.1);
+  color: #fbc346;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.label {
+  width: 160rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.value {
+  flex: 1;
+  color: #333;
+  font-size: 28rpx;
+}
+
+.info-desc {
+  margin-top: 30rpx;
+  border-top: 1rpx solid #eee;
+  padding-top: 20rpx;
+}
+
+.desc-content {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #fbc346;
+  padding-left: 10rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.nickname {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.credit {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.action-bar {
+  margin-top: 40rpx;
+}
+
+.btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.btn-primary {
+  background: #fbc346;
+  color: #fff;
+}
+
+.btn-danger {
+  background: #fff;
+  color: #f76260;
+  border: 1rpx solid #f76260;
+}

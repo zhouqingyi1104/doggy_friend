@@ -4,7 +4,25 @@
     <image class="bg" src="/image/v2/bg.png"></image>
     <view class="my-word" wx:if="{{sinageture}}">
       <view class="my-word-content">{{sinageture}}</view>
+      <view class="nav-item" bindtap="openPage" data-url="/pages/wallet/index/index">
+      <view class="item-left">
+        <image src="/image/v2/wallet.png" class="icon" wx:if="{{false}}"></image>
+        <text class="item-text">我的钱包</text>
+      </view>
+      <view class="item-right">
+        <image src="/image/v2/arrow-right.png" class="arrow"></image>
+      </view>
     </view>
+    <view class="nav-item" bindtap="openPage" data-url="/pages/task/index/index">
+      <view class="item-left">
+        <image src="/image/v2/task.png" class="icon" wx:if="{{false}}"></image>
+        <text class="item-text">时间互助 (跑腿代购)</text>
+      </view>
+      <view class="item-right">
+        <image src="/image/v2/arrow-right.png" class="arrow"></image>
+      </view>
+    </view>
+  </view>
     <view class="bg-null"></view>
     <view class="avatar-container" wx:if="{{!showLoginButton}}">
       <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">

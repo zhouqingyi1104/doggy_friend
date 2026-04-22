@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="wallet-card">
+    <view class="title">可用余额 (元)</view>
+    <view class="balance">{{wallet ? wallet.balance : '0.00'}}</view>
+    <view class="frozen">冻结担保金: ￥{{wallet ? wallet.frozen_balance : '0.00'}}</view>
+  </view>
+
+  <view class="action-bar">
+    <button class="btn btn-recharge" bindtap="recharge">充值 (模拟)</button>
+    <button class="btn btn-withdraw" bindtap="withdraw">提现 (模拟)</button>
+  </view>
+
+  <view class="tips">
+    <text>温馨提示：\n1. 发布任务时会直接扣除相应的悬赏金额。\n2. 接取任务时，若发单方设置了担保金，将从您的可用余额中扣除并计入“冻结担保金”。\n3. 任务完成后，悬赏金将转入接单者余额；如果违约，将按比例扣除违约金赔付给对方。</text>
+  </view>
+</view>

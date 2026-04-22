@@ -20,7 +20,7 @@
 <view class='container'>
   <!-- 空状态展示 -->
   <view class="empty-state" wx:if="{{leftList.length === 0 && rightList.length === 0 && notDataTips}}">
-    <image src="/image/empty.png" style="width: 200rpx; height: 200rpx; margin: 100rpx auto; display: block;"></image>
+    <image src="/image/v2/bg.png" style="width: 200rpx; height: 200rpx; margin: 100rpx auto; display: block;"></image>
     <view style="text-align: center; color: #999; font-size: 28rpx;">暂无卖舍友信息，快去发布吧~</view>
   </view>
 
