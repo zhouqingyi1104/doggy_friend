@@ -58,6 +58,10 @@
   <view class="action-bar" wx:if="{{task.status === 1 && myId !== task.buyer_id}}">
     <button class="btn btn-primary" bindtap="acceptTask">我要接单</button>
   </view>
+
+  <view class="action-bar" wx:if="{{task.status === 1 && myId === task.buyer_id}}">
+    <button class="btn btn-primary disabled" disabled>等待接单中</button>
+  </view>
   
   <view class="action-bar" wx:if="{{task.status === 2 && myId === task.seller_id}}">
     <button class="btn btn-primary" bindtap="completeTask">标记已完成</button>

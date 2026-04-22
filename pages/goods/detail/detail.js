@@ -7,8 +7,8 @@ Page({
   },
 
   onLoad(options) {
-    const userInfo = wx.getStorageSync('userInfo');
-    this.setData({ myId: userInfo?.id ? String(userInfo.id) : null });
+    const user = wx.getStorageSync('user');
+    this.setData({ myId: user?.id ? String(user.id) : null });
 
     if (options.id) {
       this.loadDetail(options.id);

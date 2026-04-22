@@ -9,8 +9,8 @@ Page({
   onLoad(options) {
     // We should ideally fetch myId from storage/auth service
     // For now we get it when loading the detail to see if I am buyer/seller
-    const userInfo = wx.getStorageSync('userInfo');
-    this.setData({ myId: userInfo?.id ? String(userInfo.id) : null });
+    const user = wx.getStorageSync('user');
+    this.setData({ myId: user?.id ? String(user.id) : null });
 
     if (options.id) {
       this.loadDetail(options.id);
